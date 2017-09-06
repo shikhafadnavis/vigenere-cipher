@@ -1,2 +1,12 @@
 This package implements vigenere cipher using Go.
-This is my first shot at using Go so I may make improvements as I 'go' :) 
+This is my first shot at using Go so I may make improvements as I 'go' :)
+
+NOTE: 
+
+1. This program strips off all the special character and numerals from the plaintext before encrypting and changes the whole file to uppercase
+
+2. The key must contain uppercase characters only
+
+Command line syntax:
+./vigenere <alphabetical-key> <plaintextfile> <ciphertextfile>
+./vigenere-decrypt <alphabetical-key> <ciphertextfile> <recovered_plaintextfile> 
