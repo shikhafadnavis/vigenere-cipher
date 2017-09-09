@@ -7,16 +7,20 @@ Date:       09/06/2017
 package main
 
 //import "fmt"
-import "os"
+import ("os"
+	"sort"
+
+)
 
 func main(){
 
 	var ciphertextLen int
-	var coincArray [30]int
+	coincArray := []int{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+	coincArrayCopy := []int{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	var index int = 0
 	var i int
 	var numShifts int
-	var max1, max2, max3, max4 int = 0,0,0,0
+
 	fi, err := os.Open(os.Args[1])
 	if err != nil{
 		panic(err)
@@ -51,35 +55,32 @@ func main(){
 			}
 
 		}
-		println(count)
 
 		coincArray[index] = count
+		coincArrayCopy[index] = count
 		index += 1
 
 	}
 
+	sort.Ints(coincArray)
+	
+	// Unsorted Array of coincidences
 	for i = 0; i < 20; i++{
+		println(coincArrayCopy[i])
+	}
+	println("Hello")
+	println(coincArrayCopy[7])
 
+	for i = 19; i > 15; i--{
 		println(coincArray[i])
-		if coincArray[i] > max1{
-			max1 = coincArray[i]
+		for j := 0; j < 20; j++{
+			if coincArray[i] == coincArrayCopy[j]{
+				println("\nIndex: ")
+				println(j)
+			}
 		}
-		if (coincArray[i] > max2) && (coincArray[i] < max1){
-			max2 = coincArray[i]
-		}
-		if (coincArray[i] > max3) && (coincArray[i] < max2) && (coincArray[i] < max1){
-			max3 = coincArray[i]
-		}
-		if (coincArray[i] > max4) && (coincArray[i] < max3) && (coincArray[i] < max2) && (coincArray[i] < max1){
-			max4 = coincArray[i]
-		} 
-	}	
+	}
 
-	print("Highest four coincidences: \n")
-	println(max1)
-	println(max2)
-	println(max3)
-	println(max4)
 
 }
 

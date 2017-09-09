@@ -42,7 +42,7 @@ func main() {
 		//println(imod)
 		var plainInt int = int(buf[i]) - 65
 		var keyInt int = int(vigenereKey[imod]) - 65
-		var plainMod int = (plainInt - keyInt) % 26
+		var plainMod int = (plainInt - keyInt -1) % 26
 		if plainMod < 0{
 			plainMod = plainMod + 26
 		}

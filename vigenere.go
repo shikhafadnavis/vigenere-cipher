@@ -58,7 +58,7 @@ func main() {
 		//println(imod)
 		var plainInt int = int(newBuf[i]) - 65
 		var keyInt int = int(vigenereKey[imod]) - 65
-		var cipMod int = (plainInt + keyInt) % 26
+		var cipMod int = (plainInt + keyInt + 1) % 26
 		if cipMod < 0{
 			cipMod = cipMod + 26
 		}
