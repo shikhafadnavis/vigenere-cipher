@@ -14,10 +14,14 @@ import ("os"
 
 func main(){
 
-	var ciphertextLen int
-	coincArray := []int{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-	coincArrayCopy := []int{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+	var ciphertextLen int 
+	var coincArray []int
+	var coincArrayCopy []int
+	coincArray = make([]int, 100, 100)
+	coincArrayCopy = make([]int, 100, 100)
+	
 	var index int = 0
+	var coincArrayLen int  = 100
 	var i int
 	var numShifts int
 
@@ -26,12 +30,9 @@ func main(){
 		panic(err)
 	}
 	
-	ciphertext := make([]byte, 4096)
-	ciphertextCopy := make([]byte, 4096)
+	ciphertext := make([]byte, 20000)
 	
 	fi.Read(ciphertext)
-	ciphertextCopy = ciphertext
-	//fi.close()
 
 	for i = 0; i < len(ciphertext); i++{
 		if ciphertext[i] == 0{
@@ -40,18 +41,15 @@ func main(){
 	}
 	ciphertextLen = i
 
-	// Finding coincidence for upto 20 shifts : Sufficient tries
+	// Finding coincidence for upto 100 shifts : Sufficient tries
 
-	for numShifts = 1; numShifts <= 20; numShifts++{
+	for numShifts = 1; numShifts <= coincArrayLen; numShifts++{
 		count := 0
 		
-		for j, k := numShifts, 0; j < ciphertextLen; j, k = j+1, k+1{
-
-			if k < (ciphertextLen - numShifts){
+		for i = numShifts; i < (ciphertextLen - numShifts -1); i++{
 				
-				if int(ciphertext[j]) == int(ciphertextCopy[k]){
-					count += 1
-				}
+			if int(ciphertext[i]) == int(ciphertext[i-numShifts]){
+				count += 1
 			}
 
 		}
@@ -65,18 +63,19 @@ func main(){
 	sort.Ints(coincArray)
 	
 	// Unsorted Array of coincidences
-	for i = 0; i < 20; i++{
+	for i = 0; i < coincArrayLen; i++{
 		println(coincArrayCopy[i])
 	}
-	println("Hello")
-	println(coincArrayCopy[7])
 
-	for i = 19; i > 15; i--{
+	
+
+	for i = (coincArrayLen-1); i > (coincArrayLen-5); i--{
 		println(coincArray[i])
-		for j := 0; j < 20; j++{
+		for j := 0; j < coincArrayLen; j++{
 			if coincArray[i] == coincArrayCopy[j]{
 				println("\nIndex: ")
 				println(j)
+				break
 			}
 		}
 	}
