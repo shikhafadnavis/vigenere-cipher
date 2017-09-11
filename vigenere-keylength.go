@@ -19,6 +19,11 @@ func main(){
 	var coincArrayCopy []int
 	coincArray = make([]int, 100, 100)
 	coincArrayCopy = make([]int, 100, 100)
+	var min int = 9999 
+	var keyLength int
+
+	// Array with frequencies of english characters
+	//var engFrequency [26]int = {.082, .015, .028, .043, .127, .022, .020, .061, .070, .002, .008, .040, .024, .067, .075, .019, .001, .060, .063, .091, .028, .010, .023, .001, .020, .001}
 	
 	var index int = 0
 	var coincArrayLen int  = 100
@@ -64,21 +69,31 @@ func main(){
 	
 	// Unsorted Array of coincidences
 	for i = 0; i < coincArrayLen; i++{
-		println(coincArrayCopy[i])
+		//println(coincArrayCopy[i])
 	}
 
 	
 
 	for i = (coincArrayLen-1); i > (coincArrayLen-5); i--{
-		println(coincArray[i])
+		//println(coincArray[i])
 		for j := 0; j < coincArrayLen; j++{
 			if coincArray[i] == coincArrayCopy[j]{
-				println("\nIndex: ")
-				println(j)
-				break
+				//println("\nIndex: ")
+				//println(j)
+				if min > j{
+					min = j
+					break
+				}
+				
 			}
 		}
 	}
+
+
+	keyLength = min + 1
+	println("\nKey Length: ", keyLength)
+	
+	
 
 
 }
