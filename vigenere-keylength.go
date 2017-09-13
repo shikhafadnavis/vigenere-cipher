@@ -13,15 +13,28 @@ import ("os"
 
 )
 
+func gcd(var1 int, var2 int) int{
+	var gcdvar int
+	for i := 1; i <= var1 && i <= var2; i++{
+		if var1%i == 0 && var2%i == 0{
+			gcdvar = i
+		}
+	}
+
+	return gcdvar
+
+}
+
 func main(){
 
 	var ciphertextLen int 
 	var coincArray []int
 	var coincArrayCopy []int
+	var keyLengthArray [4]int
 	coincArray = make([]int, 100, 100)
 	coincArrayCopy = make([]int, 100, 100)
 	var min int = 9999 
-	var keyLength int
+	var keyLength, keyBit, factor int
 	key := make([]string, 0)
 
 	// Array with frequencies of english characters
@@ -79,21 +92,34 @@ func main(){
 
 	for i = (coincArrayLen-1); i > (coincArrayLen-5); i--{
 		//println(coincArray[i])
+		min = 9999
 		for j = 0; j < coincArrayLen; j++{
 			if coincArray[i] == coincArrayCopy[j]{
-				//println("\nIndex: ")
-				//println(j)
 				if min > j{
 					min = j
+					keyLengthArray[keyBit]  = j + 1
+					keyBit += 1
 					break
 				}
 				
 			}
 		}
+
+
 	}
 
+	factor = gcd(keyLengthArray[0], keyLengthArray[1])
+	factor = gcd(keyLengthArray[2], factor)
+	factor = gcd(keyLengthArray[3], factor)
 
-	keyLength = min + 1
+	
+	if factor == 1{
+		keyLength = min + 1
+	}else{
+		keyLength = factor
+	}
+
+	
 	println("\nKey Length: ", keyLength)
 
 

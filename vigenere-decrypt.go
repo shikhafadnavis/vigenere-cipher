@@ -1,6 +1,13 @@
+/*
+Author:     Shikha Fadnavis
+Program:    Decryption using Vigenere Cipher 
+Date:       09/03/2017
+*/
+
+
 package main
 
-import "fmt"
+
 import "os"
 import "bytes"
 
@@ -20,7 +27,7 @@ func main() {
 	buf := make([]byte, 100000)
 	fi.Read(buf)
 	buf = bytes.ToUpper(buf)
-	fmt.Println(string(buf))
+	//fmt.Println(string(buf))
 	
 
 	for i = 0; i < len(buf); i++{
@@ -29,7 +36,7 @@ func main() {
 		}
 	}
 	bufLen := i
-	println(bufLen)
+	//println(bufLen)
 	
 	fplain, errplain := os.Create(os.Args[3])
 	if errplain != nil{
@@ -54,7 +61,7 @@ func main() {
 		//fmt.Println(reflect.TypeOf(ciphertext[i]))
 	}
 
-	fmt.Println(plaintext)
+	//fmt.Println(plaintext)
 	
 	
 	

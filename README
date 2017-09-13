@@ -1,4 +1,4 @@
-This package implements vigenere cipher using Go.
+This package implements Vigenere Cipher using Go.
 This is my first shot at using Go so I may make improvements as I 'go' :)
 
 NOTE: 
@@ -7,6 +7,22 @@ NOTE:
 
 2. The key must contain uppercase characters only
 
+3. The folder also contains a sample plaintext file of 76 KBs
+
 Command line syntax:
-./vigenere <alphabetical-key> <plaintextfile> <ciphertextfile>
-./vigenere-decrypt <alphabetical-key> <ciphertextfile> <recovered_plaintextfile> 
+
+
+==================================================================================================
+For Part 1
+./vigenere-encrypt <alphabetical-key> <plaintextfile.txt> <ciphertext.txt>
+This will automatically store all the ciphertext to the last file in the argument
+
+./vigenere-decrypt <alphabetical-key> <ciphertext.txt> <recovered_plaintextfile.txt> 
+This will automatically store all the recovered plaintext to the last file in the argument
+===================================================================================================
+
+===================================================================================================
+For Part 2 and 3
+./vigenere-keylength <ciphertextfile>
+This will output the keylength and the actual key to the CLI
+===================================================================================================
