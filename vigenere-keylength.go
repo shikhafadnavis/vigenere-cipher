@@ -30,9 +30,10 @@ func main(){
 	var ciphertextLen int 
 	var coincArray []int
 	var coincArrayCopy []int
-	var keyLengthArray [4]int
+	var keyLengthArray []int
 	coincArray = make([]int, 100, 100)
 	coincArrayCopy = make([]int, 100, 100)
+	keyLengthArray = make([]int, 4,4)
 	var min int = 9999 
 	var keyLength, keyBit, factor int
 	key := make([]string, 0)
@@ -98,6 +99,7 @@ func main(){
 				if min > j{
 					min = j
 					keyLengthArray[keyBit]  = j + 1
+					println(keyLengthArray[keyBit])
 					keyBit += 1
 					break
 				}
@@ -115,6 +117,10 @@ func main(){
 	
 	if factor == 1{
 		keyLength = min + 1
+		if keyLength == 1{
+			sort.Ints(keyLengthArray)
+			keyLength = keyLengthArray[1]
+		}
 	}else{
 		keyLength = factor
 	}

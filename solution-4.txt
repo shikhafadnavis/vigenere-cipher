@@ -1,0 +1,10 @@
+/*
+Author:     Shikha Fadnavis
+Program:    Finding Key length of a Vigenere Cipher 
+Date:       09/06/2017
+*/
+
+Answer-4
+
+I believe using a key as long as the ciphertext itself is indeed a very secure cipher because it will protect the ciphertext from giving out certain patterns of engligh leter frequency distributions that end up revealing the keylength and in turn the key itself.
+But it is important to make sure that the same key is not used more han once because it may give out clues to some parts of plaintext. Eg: in the WW2, German army messages would contain "Hail Hitler" at the very end/beginning. In case where same key is used on two occasions, a pattern would be clearly visible. 
