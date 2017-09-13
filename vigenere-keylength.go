@@ -6,9 +6,10 @@ Date:       09/06/2017
 
 package main
 
-//import "fmt"
+
 import ("os"
 	"sort"
+	"fmt"
 
 )
 
@@ -21,14 +22,16 @@ func main(){
 	coincArrayCopy = make([]int, 100, 100)
 	var min int = 9999 
 	var keyLength int
+	key := make([]string, 0)
 
 	// Array with frequencies of english characters
-	//var engFrequency [26]int = {.082, .015, .028, .043, .127, .022, .020, .061, .070, .002, .008, .040, .024, .067, .075, .019, .001, .060, .063, .091, .028, .010, .023, .001, .020, .001}
+	engFrequency := [26]float64{.082, .015, .028, .043, .127, .022, .020, .061, .070, .002, .008, .040, .024, .067, .075, .019, .001, .060, .063, .091, .028, .010, .023, .001, .020, .001}
 	
 	var index int = 0
 	var coincArrayLen int  = 100
-	var i int
+	var i,j, k int
 	var numShifts int
+	var modulus int
 
 	fi, err := os.Open(os.Args[1])
 	if err != nil{
@@ -76,7 +79,7 @@ func main(){
 
 	for i = (coincArrayLen-1); i > (coincArrayLen-5); i--{
 		//println(coincArray[i])
-		for j := 0; j < coincArrayLen; j++{
+		for j = 0; j < coincArrayLen; j++{
 			if coincArray[i] == coincArrayCopy[j]{
 				//println("\nIndex: ")
 				//println(j)
@@ -92,8 +95,51 @@ func main(){
 
 	keyLength = min + 1
 	println("\nKey Length: ", keyLength)
+
+
+
+	/*================== Part 3 Solution ==================*/
+
+	for i = 0; i < keyLength; i++{
+		var freqPickArray [26]float64
+		var prodSumArray = make([]float64, 26, 26)
+		var prodSumArrayCopy = make([]float64, 26, 26)
+		modulus = i 
+		for j = 0; j < ciphertextLen; j++{
+			if (j % keyLength == modulus) || (j % keyLength + 26 == modulus){
+				//pickArray = append(pickArray, string(ciphertext[j]))
+				num := int(ciphertext[j]) - 65
+				freqPickArray[num] += 1
+			}
+		}
+		
+		for j = 0; j < 26; j++{
+			var sum float64 = 0
+			for k = 0; k < 26; k++{
+				var modulo int = (k+j) % 26
+				if modulo < 0{
+					modulo = modulo + 26
+				}
+				sum = sum + (engFrequency[k] * freqPickArray[modulo])
+			}
+			
+			prodSumArray[j] = sum
+			prodSumArrayCopy[j] = sum
+		}
+		
+		sort.Float64s(prodSumArray)
+		for j = 0; j < 26; j++{
+			if prodSumArray[25] == prodSumArrayCopy[j]{
+				key = append(key, string(j + 65 -1))
+			}
+		}
 	
+			
+ 
+	}
+
 	
+	fmt.Println(key)
 
 
 }
